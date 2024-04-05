@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="Autofill,TextFields,ContentDescription,UsingOnClickInXml">
+
+    <EditText
+        android:id="@+id/pokemonSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bPokemonSearch"
+        app:layout_constraintVertical_bias="0.05"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="20sp"
+        android:hint="@string/editTextPokemon"
+        />
+    
+    <Button
+        android:id="@+id/bPokemonSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/pokemonSearch"
+        app:layout_constraintBottom_toBottomOf="@id/pokemonSearch"
+        app:layout_constraintStart_toEndOf="@id/pokemonSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        android:text="@string/buttonSearch"
+        />
+
+    <TextView
+        android:id="@+id/pokemonTextName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/pokemonSearch"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/desconocido"
+        android:textSize="30sp"
+        />
+
+    <ImageView
+        android:id="@+id/pokemonImagePokemon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/pokemonTextName"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/pokemonTextHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/pokemonTextWeight"
+        app:layout_constraintBottom_toTopOf="@id/pokemonTextWeight"
+        android:layout_marginBottom="20dp"
+        android:text="@string/textHeight"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/pokemonTextWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/pokemonTextSpecies"
+        app:layout_constraintBottom_toTopOf="@id/pokemonTextSpecies"
+        android:layout_marginBottom="20dp"
+        android:text="@string/textWeight"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/pokemonTextSpecies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/pokemonSearch"
+        app:layout_constraintBottom_toTopOf="@id/pokemonButtonAbilities"
+        android:layout_marginBottom="40dp"
+        android:text="@string/textSpecies"
+        android:textSize="20sp"
+        />
+
+    <Button
+        android:id="@+id/pokemonButtonAbilities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/pokemonButtonTypes"
+        android:layout_marginBottom="80dp"
+        android:text="@string/buttonShowAbilities"
+        />
+
+    <Button
+        android:id="@+id/pokemonButtonTypes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/pokemonButtonAbilities"
+        app:layout_constraintTop_toTopOf="@id/pokemonButtonAbilities"
+        app:layout_constraintStart_toEndOf="@id/pokemonButtonAbilities"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/buttonShowTypes"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

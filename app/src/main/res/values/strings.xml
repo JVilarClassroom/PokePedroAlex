@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">PokePedro</string>
+    <string name="desconocido">unknown</string>
+    <string name="editTextPokemon">Name or Number</string>
+    <string name="buttonSearch">Search</string>
+    <string name="pokemonName">pikachu</string>
+    <string name="textSpecies">Species:</string>
+    <string name="buttonShowAbilities">Show abilities</string>
+    <string name="buttonShowTypes">Show types</string>
+    <string name="textWeight">Weight:</string>
+    <string name="textHeight">Height:</string>
+    <string name="speciesName">Pikachu</string>
+    <string name="speciesSubtitle">(Species)</string>
+    <string name="speciesDescriptionTitle">Description:</string>
+    <string name="speciesVersionTitle">Version:</string>
+    <string name="speciesVarietiesTitle">Varieties</string>
+    <string name="speciesButtonEvolution">Evolution</string>
+    <string name="evolutionTitle">Evolution</string>
+</resources>
