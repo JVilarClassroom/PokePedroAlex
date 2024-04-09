@@ -67,12 +67,23 @@ class MainActivity : AppCompatActivity(), PokemonView {
         val pokemonTextName = findViewById<TextView>(R.id.pokemonTextName)
         val pokemonTextWeight = findViewById<TextView>(R.id.pokemonTextWeight)
         val pokemonTextHeight = findViewById<TextView>(R.id.pokemonTextHeight)
-        val pokemonImage = findViewById<ImageView>(R.id.pokemonImagePokemon)
+        val pokemonTextSpecies = findViewById<TextView>(R.id.pokemonTextSpecies)
 
         pokemonTextName.text = pokemon.name
         pokemonTextWeight.text = "Weight: "+(pokemon.weight / 10f).toString()+" kg"
         pokemonTextHeight.text = "Height: "+(pokemon.height / 10f).toString()+" m"
-        Glide.with(pokemonImage.context).load(pokemon.photo)
+        pokemonTextSpecies.text = "Species: "+pokemon.species.name
+    }
+
+    override fun showPokemonSprite(spriteUrl: String?) {
+
+        val pokemonImage = findViewById<ImageView>(R.id.pokemonImagePokemon)
+
+        Glide.with(this)
+            .load(spriteUrl)
+            .placeholder(R.drawable.caution)
+            .error(R.drawable.caution)
+            .into(pokemonImage)
     }
 
     override fun showSearchError(error: Throwable) {

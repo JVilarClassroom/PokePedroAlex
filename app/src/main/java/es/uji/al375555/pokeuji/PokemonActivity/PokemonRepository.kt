@@ -22,12 +22,14 @@ class PokemonRepository {
     suspend fun getPokemon(id: String): Pokemon {
         return withContext(Dispatchers.IO) {
             val pokemonResponse = api.getPokemon(id.lowercase())
+            val speciesResponse = pokemonResponse.species
             Pokemon(
                 id = id,
                 name = pokemonResponse.name,
                 weight = pokemonResponse.weight,
                 height = pokemonResponse.height,
-                photo = pokemonResponse.photo
+                photo = pokemonResponse.sprites.frontDefault,
+                species = speciesResponse
             )
         }
     }

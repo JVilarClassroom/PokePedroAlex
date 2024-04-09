@@ -17,6 +17,7 @@ class PokemonViewModel: ViewModel() {
             try {
                 val pokemon = pokemonRepository.getPokemon(query)
                 view?.showPokemonData(pokemon)
+                view?.showPokemonSprite(pokemon.photo)
             } catch (e: Exception) {
                 view?.showSearchError(e)
                 Log.e("PokemonViewModel", "Error fetching Pokemon", e)
