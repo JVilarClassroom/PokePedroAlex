@@ -11,11 +11,13 @@ class PokemonViewModel: ViewModel() {
     var view: PokemonView? = null
 
     private val pokemonRepository = PokemonRepository()
+    private var currentPokemon: Pokemon? = null
 
     fun onPokemonSearchRequested(query: String) {
         viewModelScope.launch(Dispatchers.Main) {
             try {
                 val pokemon = pokemonRepository.getPokemon(query)
+                currentPokemon = pokemon
                 view?.showPokemonData(pokemon)
                 view?.showPokemonSprite(pokemon.photo)
             } catch (e: Exception) {
@@ -24,4 +26,10 @@ class PokemonViewModel: ViewModel() {
             }
         }
     }
+
+    fun getCurrentPokemon(): Pokemon? {
+        // Aquí obtienes el Pokemon actual desde el repositorio u otra fuente de datos
+        return pokemonRepository.getCurrentPokemon()
+    }
+
 }

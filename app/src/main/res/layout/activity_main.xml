@@ -105,11 +105,10 @@
         android:id="@+id/pokemonButtonTypes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/pokemonButtonAbilities"
-        app:layout_constraintTop_toTopOf="@id/pokemonButtonAbilities"
-        app:layout_constraintStart_toEndOf="@id/pokemonButtonAbilities"
-        app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/buttonShowTypes"
-        />
+        app:layout_constraintBottom_toBottomOf="@id/pokemonButtonAbilities"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/pokemonButtonAbilities"
+        app:layout_constraintTop_toTopOf="@id/pokemonButtonAbilities" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

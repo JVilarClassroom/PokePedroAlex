@@ -19,18 +19,27 @@ class PokemonRepository {
         api = retrofit.create(PokeAPI::class.java)
     }
 
+    private var lastSearchedPokemon: Pokemon? = null
+
     suspend fun getPokemon(id: String): Pokemon {
         return withContext(Dispatchers.IO) {
             val pokemonResponse = api.getPokemon(id.lowercase())
-            val speciesResponse = pokemonResponse.species
-            Pokemon(
+            val pokemon = Pokemon(
                 id = id,
                 name = pokemonResponse.name,
                 weight = pokemonResponse.weight,
                 height = pokemonResponse.height,
                 photo = pokemonResponse.sprites.frontDefault,
-                species = speciesResponse
+                species = pokemonResponse.species,
+                types = pokemonResponse.types.map { Type(it.typeData.name) },
+                abilities = pokemonResponse.abilities.map { it.ability.name }
             )
+            lastSearchedPokemon = pokemon
+            pokemon
         }
+    }
+
+    fun getCurrentPokemon(): Pokemon {
+        return lastSearchedPokemon ?: throw IllegalStateException("No pokemon yet")
     }
 }

@@ -9,7 +9,9 @@ data class PokemonResponse(
     val species: SpeciesResponse,
     val weight: Int,
     val height: Int,
-    val sprites: Sprites
+    val sprites: Sprites,
+    val types: List<TypeWrapper>,
+    val abilities: List<AbilityWrapper>
 )
 
 data class Sprites(
@@ -24,5 +26,22 @@ data class Sprites(
 )
 
 data class SpeciesResponse(
+    val name: String
+)
+
+data class TypeWrapper(
+    val slot: Int,
+    @Json(name = "type") val typeData: TypeData
+)
+
+data class TypeData(
+    val name: String
+)
+
+data class AbilityWrapper(
+    val ability: AbilityData
+)
+
+data class AbilityData(
     val name: String
 )
