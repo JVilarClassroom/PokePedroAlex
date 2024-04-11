@@ -23,6 +23,7 @@ import es.uji.al375555.pokeuji.SpeciesActivity.SpeciesActivity
 class MainActivity : AppCompatActivity(), PokemonView {
 
     private val viewModel: PokemonViewModel = PokemonViewModel()
+    private var pokemonName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,19 +75,23 @@ class MainActivity : AppCompatActivity(), PokemonView {
     }
 
     private fun pokemonToSpecies() {
-        val intent = Intent(this, SpeciesActivity::class.java)
-        startActivity(intent)
+        pokemonName?.let {
+            val intent = Intent(this, SpeciesActivity::class.java)
+            intent.putExtra("POKEMON_NAME", it)
+            startActivity(intent)
+        }
     }
 
     @SuppressLint("SetTextI18n", "CheckResult")
     override fun showPokemonData(pokemon: Pokemon) {
+        pokemonName = pokemon.name
 
         val pokemonTextName = findViewById<TextView>(R.id.pokemonTextName)
         val pokemonTextWeight = findViewById<TextView>(R.id.pokemonTextWeight)
         val pokemonTextHeight = findViewById<TextView>(R.id.pokemonTextHeight)
         val pokemonTextSpecies = findViewById<TextView>(R.id.pokemonTextSpecies)
 
-        pokemonTextName.text = pokemon.name
+        pokemonTextName.text = pokemonName
         pokemonTextWeight.text = "Weight: "+(pokemon.weight / 10f).toString()+" kg"
         pokemonTextHeight.text = "Height: "+(pokemon.height / 10f).toString()+" m"
         pokemonTextSpecies.text = "Species: "+pokemon.species.name

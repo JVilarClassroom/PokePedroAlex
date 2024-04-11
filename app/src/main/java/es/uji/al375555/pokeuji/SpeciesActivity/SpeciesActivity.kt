@@ -16,6 +16,10 @@ class SpeciesActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_species)
 
+        val pokemonName = intent.getStringExtra("POKEMON_NAME")
+        val speciesPokemonName = findViewById<TextView>(R.id.speciesTextName)
+        speciesPokemonName.text = pokemonName
+
         val speciesButtonEvolution = findViewById<TextView>(R.id.speciesButtonEvolution)
         speciesButtonEvolution.setOnClickListener { speciesToEvolution() }
 
