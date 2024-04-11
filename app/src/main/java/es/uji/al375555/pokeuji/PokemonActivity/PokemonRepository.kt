@@ -7,23 +7,13 @@ import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class PokemonRepository {
-    private val api: PokeAPI
-
-    init {
-        val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://pokeapi.co/api/v2/")
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .build()
-        api = retrofit.create(PokeAPI::class.java)
-    }
+class PokemonRepository(private val cachedAPI: CachedAPI) {
 
     private var lastSearchedPokemon: Pokemon? = null
 
     suspend fun getPokemon(id: String): Pokemon {
         return withContext(Dispatchers.IO) {
-            val pokemonResponse = api.getPokemon(id.lowercase())
+            val pokemonResponse = cachedAPI.getPokemon(id.lowercase())
             val pokemon = Pokemon(
                 id = id,
                 name = pokemonResponse.name,

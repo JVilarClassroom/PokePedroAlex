@@ -14,6 +14,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import es.uji.al375555.pokeuji.PokemonActivity.CachedAPI
+import es.uji.al375555.pokeuji.PokemonActivity.PokeAPI
 import es.uji.al375555.pokeuji.PokemonActivity.Pokemon
 import es.uji.al375555.pokeuji.PokemonActivity.PokemonView
 import es.uji.al375555.pokeuji.PokemonActivity.PokemonViewModel
@@ -21,7 +23,8 @@ import es.uji.al375555.pokeuji.SpeciesActivity.SpeciesActivity
 
 class MainActivity : AppCompatActivity(), PokemonView {
 
-    private val viewModel: PokemonViewModel = PokemonViewModel()
+    private val cachedAPI = CachedAPI(PokeAPI.create())
+    private val viewModel: PokemonViewModel = PokemonViewModel(cachedAPI)
     private var pokemonName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

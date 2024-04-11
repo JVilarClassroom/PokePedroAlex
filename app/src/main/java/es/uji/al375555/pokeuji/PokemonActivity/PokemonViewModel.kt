@@ -6,11 +6,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PokemonViewModel: ViewModel() {
+class PokemonViewModel(private val cachedAPI: CachedAPI): ViewModel() {
 
     var view: PokemonView? = null
 
-    private val pokemonRepository = PokemonRepository()
+    private val pokemonRepository = PokemonRepository(cachedAPI)
     private var currentPokemon: Pokemon? = null
 
     fun onPokemonSearchRequested(query: String) {
