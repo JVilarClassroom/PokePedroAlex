@@ -27,8 +27,7 @@ class PokemonViewModel: ViewModel() {
         }
     }
 
-    fun getCurrentPokemon(): Pokemon? {
-        // Aquí obtienes el Pokemon actual desde el repositorio u otra fuente de datos
+    fun getCurrentPokemon(): Pokemon {
         return pokemonRepository.getCurrentPokemon()
     }
 

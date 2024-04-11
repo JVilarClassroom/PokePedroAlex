@@ -2,7 +2,6 @@ package es.uji.al375555.pokeuji
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.util.Log
 import android.widget.Toast
 import android.os.Bundle
 import android.widget.Button
@@ -49,18 +48,12 @@ class MainActivity : AppCompatActivity(), PokemonView {
 
         val pokemonButtonTypes = findViewById<Button>(R.id.pokemonButtonTypes)
         pokemonButtonTypes.setOnClickListener {
-            val currentPokemonName = viewModel.getCurrentPokemon()
-            currentPokemonName?.let {
-                showTypesDialog()
-            }
+            showTypesDialog()
         }
 
         val pokemonButtonMoves = findViewById<Button>(R.id.pokemonButtonAbilities)
         pokemonButtonMoves.setOnClickListener {
-            val currentPokemonName = viewModel.getCurrentPokemon()
-            currentPokemonName?.let {
-                showMovesDialog()
-            }
+            showMovesDialog()
         }
     }
 
@@ -109,32 +102,27 @@ class MainActivity : AppCompatActivity(), PokemonView {
     }
 
     override fun showSearchError(error: Throwable) {
-        Toast.makeText(this, "Error al buscar Pokémon: ${error.message}", Toast.LENGTH_SHORT).show()
-        Log.e("MainActivity", "Error al buscar Pokémon", error)
+        Toast.makeText(this, "Error al buscar Pokémon", Toast.LENGTH_SHORT).show()
     }
 
-    fun showTypesDialog() {
+    private fun showTypesDialog() {
         val currentPokemon = viewModel.getCurrentPokemon()
-        if (currentPokemon != null) {
-            val types = currentPokemon.types.joinToString(separator = "\n") { it.name } // Obtener nombres de los tipos como una cadena separada por comas
-            MaterialAlertDialogBuilder(this)
-                .setTitle("Types of ${currentPokemon.name}")
-                .setMessage(types)
-                .setNegativeButton("OK") { dialog, _ -> dialog.dismiss() }
-                .show()
-        } else {}
+        val types = currentPokemon.types.joinToString(separator = "\n") { it.name }
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Types of ${currentPokemon.name}")
+            .setMessage(types)
+            .setNegativeButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 
-    fun showMovesDialog() {
+    private fun showMovesDialog() {
         val currentPokemon = viewModel.getCurrentPokemon()
-        if (currentPokemon != null) {
-            val moveNames = currentPokemon.abilities
-            val message = moveNames.joinToString(separator = "\n")
-            MaterialAlertDialogBuilder(this)
-                .setTitle("Abilities of ${currentPokemon.name}")
-                .setMessage(message)
-                .setNegativeButton("OK") { dialog, _ -> dialog.dismiss() }
-                .show()
-        } else {}
+        val moveNames = currentPokemon.abilities
+        val message = moveNames.joinToString(separator = "\n")
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Abilities of ${currentPokemon.name}")
+            .setMessage(message)
+            .setNegativeButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 }
