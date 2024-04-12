@@ -1,11 +1,7 @@
 package es.uji.al375555.pokeuji.PokemonActivity
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 class PokemonRepository(private val cachedAPI: CachedAPI) {
 
@@ -27,6 +23,10 @@ class PokemonRepository(private val cachedAPI: CachedAPI) {
             lastSearchedPokemon = pokemon
             pokemon
         }
+    }
+
+    suspend fun getPokemonSpecies(id: String): SpeciesName {
+        return cachedAPI.getPokemonSpecies(id)
     }
 
     fun getCurrentPokemon(): Pokemon {

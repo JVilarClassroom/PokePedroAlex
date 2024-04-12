@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PokemonResponse(
     val name: String,
-    val species: SpeciesResponse,
+    val species: SpeciesName,
     val weight: Int,
     val height: Int,
     val sprites: Sprites,
@@ -25,7 +25,7 @@ data class Sprites(
     @Json(name = "back_shiny_female") val backShinyFemale: String?,
 )
 
-data class SpeciesResponse(
+data class SpeciesName(
     val name: String
 )
 

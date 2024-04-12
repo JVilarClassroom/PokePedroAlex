@@ -31,4 +31,7 @@ class PokemonViewModel(private val cachedAPI: CachedAPI): ViewModel() {
         return pokemonRepository.getCurrentPokemon()
     }
 
+    suspend fun loadPokemonSpecies(id: String): SpeciesName {
+        return pokemonRepository.getPokemonSpecies(id)
+    }
 }

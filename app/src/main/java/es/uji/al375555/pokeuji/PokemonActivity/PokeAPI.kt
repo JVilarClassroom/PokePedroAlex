@@ -13,6 +13,10 @@ interface PokeAPI {
     @GET("pokemon/{id}")
     suspend fun getPokemon(@Path("id") id: String): PokemonResponse
 
+    @Headers("Accept: application/json")
+    @GET("pokemon-species/{id}")
+    suspend fun getPokemonSpecies(@Path("id") id: String): SpeciesName
+
     companion object {
         fun create(): PokeAPI {
             val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()

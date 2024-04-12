@@ -6,7 +6,7 @@ data class Pokemon(
     val photo: String,
     val weight: Int,
     val height: Int,
-    val species: SpeciesResponse,
+    val species: SpeciesName,
     val types: List<Type>,
     val abilities: List<String>
 )
