@@ -4,14 +4,19 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.widget.Toast
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import es.uji.al375555.pokeuji.PokemonActivity.CachedAPI
@@ -24,13 +29,18 @@ import es.uji.al375555.pokeuji.SpeciesActivity.SpeciesActivity
 class MainActivity : AppCompatActivity(), PokemonView {
 
     private val cachedAPI = CachedAPI(PokeAPI.create())
-    private val viewModel: PokemonViewModel = PokemonViewModel(cachedAPI)
+    private var viewModel: PokemonViewModel = PokemonViewModel(cachedAPI)
     private var pokemonName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        if (savedInstanceState != null) {
+            pokemonName = savedInstanceState.getString("pokemonName")
+            pokemonName?.let { viewModel.onPokemonSearchRequested(it) }
+        }
 
         val pokemonTextSpecies = findViewById<TextView>(R.id.pokemonTextSpecies)
         pokemonTextSpecies.setOnClickListener { pokemonToSpecies() }
@@ -43,6 +53,15 @@ class MainActivity : AppCompatActivity(), PokemonView {
 
         val pokemonSearchText = findViewById<EditText>(R.id.pokemonSearch)
         val pokemonSearchButton = findViewById<Button>(R.id.bPokemonSearch)
+
+        //Cambiar el color del texto cuando se está escribiendo otro pokemon
+        pokemonSearchText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                pokemonSearchText.setTextColor(ContextCompat.getColor(applicationContext, R.color.black))
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
         pokemonSearchButton.setOnClickListener {
             val searchText = pokemonSearchText.text.toString()
@@ -105,7 +124,9 @@ class MainActivity : AppCompatActivity(), PokemonView {
     }
 
     override fun showSearchError(error: Throwable) {
-        Toast.makeText(this, "Error al buscar Pokémon", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Pokemon not found", Toast.LENGTH_SHORT).show()
+        val pokemonSearchText = findViewById<EditText>(R.id.pokemonSearch)
+        pokemonSearchText.setTextColor(ContextCompat.getColor(applicationContext, R.color.red))
     }
 
     private fun showTypesDialog() {
@@ -127,5 +148,17 @@ class MainActivity : AppCompatActivity(), PokemonView {
             .setMessage(message)
             .setNegativeButton("OK") { dialog, _ -> dialog.dismiss() }
             .show()
+    }
+
+    //Guardar datos por si se gira la pantalla
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("pokemonName", pokemonName)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        pokemonName = savedInstanceState.getString("pokemonName")
+        pokemonName?.let { viewModel.onPokemonSearchRequested(it) }
     }
 }

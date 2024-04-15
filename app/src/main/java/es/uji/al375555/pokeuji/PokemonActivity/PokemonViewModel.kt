@@ -2,6 +2,8 @@ package es.uji.al375555.pokeuji.PokemonActivity
 
 import androidx.lifecycle.ViewModel
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,9 +31,5 @@ class PokemonViewModel(private val cachedAPI: CachedAPI): ViewModel() {
 
     fun getCurrentPokemon(): Pokemon {
         return pokemonRepository.getCurrentPokemon()
-    }
-
-    suspend fun loadPokemonSpecies(id: String): SpeciesName {
-        return pokemonRepository.getPokemonSpecies(id)
     }
 }

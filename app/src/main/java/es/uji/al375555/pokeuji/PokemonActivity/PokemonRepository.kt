@@ -1,5 +1,7 @@
 package es.uji.al375555.pokeuji.PokemonActivity
 
+import es.uji.al375555.pokeuji.SpeciesActivity.PokemonDescription
+import es.uji.al375555.pokeuji.SpeciesActivity.Variety
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -23,10 +25,6 @@ class PokemonRepository(private val cachedAPI: CachedAPI) {
             lastSearchedPokemon = pokemon
             pokemon
         }
-    }
-
-    suspend fun getPokemonSpecies(id: String): SpeciesName {
-        return cachedAPI.getPokemonSpecies(id)
     }
 
     fun getCurrentPokemon(): Pokemon {
